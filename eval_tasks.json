@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "What is KV cache in LLM inference and why does it reduce latency?",
+    "expected_keywords": ["key", "value", "recomputation", "decode", "latency"],
+    "category": "compound"
+  },
+  {
+    "id": 2,
+    "question": "What is the ReAct framework and how does it relate to LangGraph?",
+    "expected_keywords": ["reasoning", "acting", "tool", "graph", "stateful"],
+    "category": "compound"
+  },
+  {
+    "id": 3,
+    "question": "If a Kafka cluster handles 3200 events per second and I scale to 3 brokers, and each broker handles equal load, how many events per second does each broker handle?",
+    "expected_keywords": ["1066", "1067"],
+    "category": "math_and_lookup"
+  },
+  {
+    "id": 4,
+    "question": "What is RAG and what is the difference between retrieval-augmented generation and standard LLM generation?",
+    "expected_keywords": ["retrieval", "document", "augment", "ground"],
+    "category": "compound"
+  },
+  {
+    "id": 5,
+    "question": "Explain vLLM's PagedAttention and calculate: if a model with PagedAttention achieves 85% GPU utilization versus 45% without it, what is the percentage improvement?",
+    "expected_keywords": ["88", "pagedattention", "memory", "throughput"],
+    "category": "math_and_lookup"
+  },
+  {
+    "id": 6,
+    "question": "What is Prometheus and what is Grafana, and how are they typically used together for observability?",
+    "expected_keywords": ["metrics", "monitoring", "dashboard", "time-series"],
+    "category": "compound"
+  },
+  {
+    "id": 7,
+    "question": "A neural network has 3 layers with 512, 256, and 128 neurons. What is the total parameter count between the first and second layers (assuming fully connected, no bias)?",
+    "expected_keywords": ["131072"],
+    "category": "math"
+  },
+  {
+    "id": 8,
+    "question": "What is LangGraph and how does it improve on single-pass LLM calls for agentic tasks?",
+    "expected_keywords": ["graph", "stateful", "agent", "loop", "langchain"],
+    "category": "compound"
+  },
+  {
+    "id": 9,
+    "question": "Explain the difference between Redis and PostgreSQL, and when would you use each?",
+    "expected_keywords": ["in-memory", "cache", "persistent", "relational", "sql"],
+    "category": "compound"
+  },
+  {
+    "id": 10,
+    "question": "What does IFAS stand for, where is it located, and what is its research focus?",
+    "expected_keywords": ["institute", "food", "agricultural", "florida", "sciences"],
+    "category": "lookup"
+  },
+  {
+    "id": 11,
+    "question": "If preprocessing latency drops from 48ms to 11ms per image, what is the speedup factor and percentage improvement?",
+    "expected_keywords": ["4.36", "77"],
+    "category": "math"
+  },
+  {
+    "id": 12,
+    "question": "What is the Transformer architecture and how does self-attention work at a high level?",
+    "expected_keywords": ["attention", "query", "key", "value", "vaswani"],
+    "category": "compound"
+  },
+  {
+    "id": 13,
+    "question": "What is Docker and Kubernetes, and what problem does Kubernetes solve that Docker alone cannot?",
+    "expected_keywords": ["container", "orchestration", "scaling", "deployment"],
+    "category": "compound"
+  },
+  {
+    "id": 14,
+    "question": "Calculate: a system with 8 camera workers reduces batch time from 42 minutes to 27 minutes. What is the efficiency percentage (time saved / original time)?",
+    "expected_keywords": ["35.7"],
+    "category": "math"
+  },
+  {
+    "id": 15,
+    "question": "What is PyTorch and CUDA, and how do they work together for GPU-accelerated training?",
+    "expected_keywords": ["pytorch", "cuda", "gpu", "nvidia", "tensor"],
+    "category": "compound"
+  }
+]
