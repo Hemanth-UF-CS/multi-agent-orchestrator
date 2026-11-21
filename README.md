@@ -60,7 +60,7 @@ class OrchestratorState(TypedDict):
 
 ### Observability
 
-Every agent appends `TraceEntry` dicts to `state.trace`:
+Every agent appends `TraceEntry` dicts to `state.trace`. The shape of `--verbose` output (values here are illustrative, not measured):
 
 ```
 [01] PLANNER       result        12ms    142 tok
@@ -113,7 +113,7 @@ Outputs:
 - **Head-to-head table** — which tasks each system passes/fails
 - **Token and latency delta** — quantifies where multi-agent adds value vs. overhead
 
-> Fill in measured numbers after running the eval.
+The eval calls the OpenAI API, so it needs `OPENAI_API_KEY` and costs a few cents per run.
 
 ## Project structure
 
@@ -130,20 +130,29 @@ multi-agent-orchestrator/
 │   └── verifier.py        # completeness/correctness check
 ├── eval.py                # Orchestrator eval + single-agent comparison
 ├── eval_tasks.json        # 15 compound tasks
+├── tools.py               # search_docs, lookup and the AST-based calculator (shared with react-agent)
+├── tests/                 # offline tests: routing, retry limit, graph wiring
 ├── main.py                # Interactive CLI
 └── requirements.txt
+```
+
+## Tests
+
+```bash
+pip install -r requirements.txt pytest
+pytest -q      # offline, no API key needed (also run in CI)
 ```
 
 ## Design decisions
 
 **Why LangGraph over a hand-rolled loop?**
-LangGraph handles typed state propagation, conditional routing, and cycle detection out of the box.  Using it here turns "familiarity with LangGraph" into "built a multi-agent system in LangGraph" — a concrete, demonstrable skill for JDs that name it explicitly.
+LangGraph gives typed state that merges per field, conditional edges, and a recursion limit as a backstop. The routing stays in small pure functions (`dispatch_router`, `route_after_verify`) that are unit-tested without calling a model.
 
 **Why `operator.add` on list fields?**
 Each specialist appends its results to `retriever_results` / `executor_results` rather than overwriting.  This means late-arriving retriever results don't clobber earlier ones, and the verifier sees the full picture.
 
 **Why a separate verifier agent?**
-The single-agent self-critique in react-agent is a prompt nudge.  A dedicated verifier agent is a structural guarantee — it runs as its own LLM call with its own prompt and cannot be skipped by the planner.
+The single-agent self-critique in react-agent is a prompt nudge.  A dedicated verifier agent is a structural guarantee — it runs as its own LLM call with its own prompt and cannot be skipped by the planner. A failed verification sends the question back to the planner, at most `MAX_PLANNER_RETRIES` times (default 2), after which the aggregator answers with what was collected.
 
 **When does multi-agent help vs. hurt?**
 Multi-agent helps on decomposition-heavy tasks (compound questions, multi-step reasoning).  It adds token and latency overhead on simple lookup tasks where a single ReAct agent would finalize in 2–3 steps.  The `--compare` eval quantifies this tradeoff.

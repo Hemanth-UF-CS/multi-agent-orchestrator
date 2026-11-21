@@ -7,19 +7,11 @@ Synthesizes gathered facts into a structured response for its subtask.
 
 import json
 import logging
-import sys
-from pathlib import Path
 from typing import Any
 
 import openai
 
-_REACT_AGENT_PATH = Path(__file__).parent.parent.parent / "react-agent"
-if _REACT_AGENT_PATH.exists():
-    sys.path.insert(0, str(_REACT_AGENT_PATH))
-    from tools import calculator, TOOL_SCHEMAS, CalculatorArgs  # noqa: E402
-    sys.path.pop(0)
-else:
-    from tools_stub import calculator, TOOL_SCHEMAS, CalculatorArgs  # noqa: E402
+from tools import calculator, TOOL_SCHEMAS, CalculatorArgs
 
 from config import settings
 from state import OrchestratorState

@@ -8,20 +8,11 @@ the aggregated tool results as a structured finding.
 
 import json
 import logging
-import sys
-from pathlib import Path
 from typing import Any
 
 import openai
 
-# Reuse tools from react-agent if available; otherwise inline stubs.
-_REACT_AGENT_PATH = Path(__file__).parent.parent.parent / "react-agent"
-if _REACT_AGENT_PATH.exists():
-    sys.path.insert(0, str(_REACT_AGENT_PATH))
-    from tools import search_docs, lookup, TOOL_SCHEMAS, SearchDocsArgs, LookupArgs  # noqa: E402
-    sys.path.pop(0)
-else:
-    from tools_stub import search_docs, lookup, TOOL_SCHEMAS, SearchDocsArgs, LookupArgs  # noqa: E402
+from tools import search_docs, lookup, TOOL_SCHEMAS, SearchDocsArgs, LookupArgs
 
 from config import settings
 from state import OrchestratorState

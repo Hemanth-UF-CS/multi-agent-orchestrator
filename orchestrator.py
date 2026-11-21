@@ -43,6 +43,7 @@ from agents.planner import planner_node
 from agents.retriever import retriever_node
 from agents.executor import executor_node
 from agents.verifier import verifier_node
+from config import settings
 from state import OrchestratorState
 from tracing import make_entry, timed
 
@@ -79,7 +80,12 @@ def dispatch_router(state: OrchestratorState) -> Literal["retriever", "executor"
 
 
 def route_after_verify(state: OrchestratorState) -> Literal["aggregate", "planner"]:
+    """Replan after a failed verification, at most ``max_planner_retries`` times."""
     if state.get("verification_passed"):
+        return "aggregate"
+    plans = sum(1 for e in state.get("trace", []) if e["agent"] == "planner" and e["event"] == "result")
+    if plans > settings.max_planner_retries:
+        logger.warning("Verification still failing after %d plans; answering with what we have", plans)
         return "aggregate"
     return "planner"
 
