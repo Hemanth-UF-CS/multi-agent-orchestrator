@@ -1,6 +1,6 @@
 # Multi-Agent Orchestrator with Hierarchical Delegation
 
-A planner-orchestrator that decomposes tasks and delegates to specialist sub-agents over a shared typed state, built with **LangGraph**.  This extends the [react-agent](https://github.com/S-HEMANTH-REDDY/react-agent) project — the single-agent primitive becomes one of several specialists in a directed graph.
+A planner-orchestrator that decomposes tasks and delegates to specialist sub-agents over a shared typed state, built with **LangGraph**.  This extends the [react-agent](https://github.com/Hemanth-UF-CS/react-agent) project — the single-agent primitive becomes one of several specialists in a directed graph.
 
 ## Architecture
 
@@ -80,7 +80,7 @@ Every agent appends `TraceEntry` dicts to `state.trace`:
 ## Quick start
 
 ```bash
-git clone https://github.com/S-HEMANTH-REDDY/multi-agent-orchestrator.git
+git clone https://github.com/Hemanth-UF-CS/multi-agent-orchestrator.git
 cd multi-agent-orchestrator
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
